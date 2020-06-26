@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(name='crackmapexec',
-    version='5.0.1dev',
+    version='5.1.0dev',
     description='A swiss army knife for pentesting networks',
     classifiers=[
         'Environment :: Console',
@@ -24,14 +24,17 @@ setup(name='crackmapexec',
         'requests>=2.9.1',
         'requests-ntlm>=0.3.0',
         'bs4',
+        'lsassy',
         'termcolor',
         'msgpack',
+        'neo4j',
         'pylnk3',
-        'pywinrm',
+        'pypsrp',
         'paramiko',
         'impacket',
         'xmltodict',
-        'terminaltables'
+        'terminaltables',
+        'lsassy'
     ],
     entry_points={
         'console_scripts': ['crackmapexec=cme.crackmapexec:main', 'cme=cme.crackmapexec:main', 'cmedb=cme.cmedb:main'],
