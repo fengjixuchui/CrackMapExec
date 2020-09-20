@@ -13,17 +13,9 @@ clean:
 	find . -name '__pycache__' -exec rm -rf {} +
 	find . -name '.pytest_cache' -exec rm -rf {} +
 
-build:
-	mkdir build/
-	mkdir bin/
-	cp -r cme build/
-	python3 -m pip install -r requirements.txt -t build
-	rm -rf build/__pycache__ build/*.dist-info
-	shiv --site-packages build -E --compressed -e 'cme.crackmapexec:main' -o bin/cme -p "/usr/bin/env -S python3 -sE"
-	shiv --site-packages build -E --compressed -e 'cme.cmedb:main' -o bin/cmedb -p "/usr/bin/env -S python3 -sE"
-
-rebuild: clean build
-
 tests:
-	flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=cme/data,cme/thirdparty
-	flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude=cme/data,cme/thirdparty
+	flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude cme/thirdparty/*,cme/data/*
+
+reqs:
+	poetry export --without-hashes -f requirements.txt -o requirements.txt
+	poetry export --without-hashes --dev -f requirements.txt -o requirements-dev.txt
